@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     # myApps
     'Articles_app',
+    'easy_thumbnails',
 ]
 
 MIDDLEWARE = [
@@ -125,3 +126,5 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
     '/var/www/static/',
 ]
+MEDIA_ROOT ='media'
+MEDIA_URL = '/media/'
