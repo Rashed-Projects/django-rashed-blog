@@ -9,9 +9,13 @@
      {% for item in articles %}
         <article>
            <a href="#" class="image">
-            {% load thumbnail %}
-            <img src="{{ profile.photo|thumbnail_url:'avatar' }}" alt="" />
-            
+             {% load thumbnail %}
+             
+             {% comment %}
+               {% thumbnail [source] [size] [options] as [variable] %}
+             {% endcomment %}
+               
+             <img src="{{ profile.photo|thumbnail_url:'avatar' }}" alt="" />
             </a>
            <h3> {{item.title}}</h3>
            <p>
