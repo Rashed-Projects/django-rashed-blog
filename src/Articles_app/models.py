@@ -57,7 +57,11 @@ class Articles_model(models.Model):
     def __str__(self):
         return self.title
 
-
+    def get_article_type():
+        lst=[]
+        for i in CATEGORY_TYPE:
+            lst.append(i[1])
+        return lst
 
 
 
