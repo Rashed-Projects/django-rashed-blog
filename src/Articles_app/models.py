@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.utils.text import slugify
 from _datetime import timezone
 from django.utils.timezone import now
+from ckeditor.fields import RichTextField
 
 
 
@@ -35,7 +36,8 @@ MODELS
 class Articles_model(models.Model):
     title = models.CharField(max_length = 50)
     intro=models.CharField(max_length = 60)
-    main=models.TextField()
+    main=models.CharField(max_length = 60)
+    text=RichTextField()
     creade_date = models.DateField(auto_now=True,
                                    blank=True,
                                    auto_now_add=False)
