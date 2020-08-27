@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='articles_model',
             name='main',
-            field=models.TextField,
+            field=models.CharField(max_length=25),
         ),
     ]

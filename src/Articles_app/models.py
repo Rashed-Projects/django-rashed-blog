@@ -36,7 +36,6 @@ MODELS
 class Articles_model(models.Model):
     title = models.CharField(max_length = 50)
     intro=models.CharField(max_length = 60)
-    main=models.CharField(max_length = 60)
     text=RichTextField()
     creade_date = models.DateField(auto_now=True,
                                    blank=True,
