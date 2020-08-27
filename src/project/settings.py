@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # myApps
     'Articles_app',
     'easy_thumbnails',
+    # 'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -118,10 +119,27 @@ USE_L10N = True
 USE_TZ = True
 
 
+# thumbnails:
+# 288 × 174
+# 416 × 256
+# 736 × 512
+# 1280 × 416
+THUMBNAIL_ALIASES = {
+    '': {
+        'sideArticle': {'size': (288, 174), 'crop': True},
+        'listArticle': {'size': (416, 256), 'crop': True},
+        'mainArticle': {'size': (736, 512), 'crop': True},
+        'detailArticle': {'size': (1280, 416), 'crop': True},
+    },
+}
+
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = 'staticFiles'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]

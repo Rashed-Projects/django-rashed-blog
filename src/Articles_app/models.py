@@ -5,6 +5,9 @@ from _datetime import timezone
 from django.utils.timezone import now
 
 
+
+
+
 '''
 METHODS
 '''
@@ -32,7 +35,7 @@ MODELS
 class Articles_model(models.Model):
     title = models.CharField(max_length = 50)
     intro=models.CharField(max_length = 60)
-    main=models.CharField(max_length = 2000)
+    main=models.TextField()
     creade_date = models.DateField(auto_now=True,
                                    blank=True,
                                    auto_now_add=False)

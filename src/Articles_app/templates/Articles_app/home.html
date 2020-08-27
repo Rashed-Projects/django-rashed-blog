@@ -15,14 +15,15 @@
                {% thumbnail [source] [size] [options] as [variable] %}
              {% endcomment %}
                
-             <img src="{{ profile.photo|thumbnail_url:'avatar' }}" alt="" />
+              
+             <img src="{{item.image|thumbnail_url:'listArticle' }}" alt=" " />
             </a>
            <h3> {{item.title}}</h3>
            <p>
              {{item.intro}}
            </p>
            <ul class="actions">
-             <li><a href="#" class="button">More</a></li>
+             <li><a href="{% url 'Articles_app:detials' slug=item.slug %}" class="button">More</a></li>
            </ul>
          </article>
           {% endfor %}

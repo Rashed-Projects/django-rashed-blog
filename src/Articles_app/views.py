@@ -10,3 +10,10 @@ def home(request):
         'articles':articles
     }
     return render(request,'Articles_app/home.html',context)
+
+def articleDetails(request,slug):
+    article=Articles_model.objects.get(slug=slug)
+    context={
+        'article':article
+    }
+    return render(request,'Articles_app/article_details.html',context)
