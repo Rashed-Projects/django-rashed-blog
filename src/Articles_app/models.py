@@ -70,3 +70,13 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+class Comments(models.Model):
+    article=models.ForeignKey(Articles_model, verbose_name=("comment"),related_name='comment', on_delete=models.CASCADE)
+    name=models.CharField(max_length=50)
+    body=models.TextField()
+    date_added=models.DateField( auto_now=False, auto_now_add=True)
+
+
+    def __str__(self):
+        return '%s - %s' % (self.article, self.name)
