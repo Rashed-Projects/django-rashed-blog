@@ -1,32 +1,62 @@
 {% extends 'index.html' %}
 {% block main %}
-     <!-- Section -->
-     <section>
-       <header class="major">
-         <h2>PERSONAL ACTIVITIES</h2>
-       </header>
-       <div class="posts">
-     {% for item in articles %}
-        <article>
-           <a href="#" class="image">
-             {% load thumbnail %}
-                {% thumbnail item.image 400x200 crop as img %}
-             <img src="{{ img.url }}" alt="" />
-            </a>
-           <h3> {{item.title}}</h3>
-           <p>
-             {{item.intro}}
-           </p>
-           <ul class="actions">
-             <li><a href="#" class="button">More</a></li>
-           </ul>
-         </article>
-          {% endfor %}
-       </div>
-     </section>
-     
-       
-       
+
+
+
+  {% for sec in type %}
+    <!-- Section -->
+    <section>
+      <header class="major">
+        <h2>{{sec}}</h2>
+      </header>
+      <div class="posts">
+        {% for item in articles %}
+        {% if item.article_type == sec%}
+          <article>
+          <a href="{% url 'Articles_app:detials' slug=item.slug %}" class="image">
+            {% load thumbnail %}
+            {% comment %}
+              {% thumbnail [source] [size] [options] as [variable] %}
+            {% endcomment %}
+            <img src="{{item.image|thumbnail_url:'listArticle' }}" alt=" " />
+          </a>
+          <h3> {{item.title}}</h3>
+          <p>
+            {{item.intro}}
+          </p>
+          <ul class="actions">
+            <li><a href="{% url 'Articles_app:detials' slug=item.slug %}" class="button">More</a></li>
+          </ul>
+        </article>
+        {% endif %}
+
+        {% endfor %}
+      </div>
+
+
+    </section>
+  {% endfor %}
     
+    
+  <!--pagination-->
+  <section>
+    {% if articles.has_other_pages %}
+    <ul class="pagination" style="text-align: center;">
+      {% if articles.has_previous %}
+      <li><a class="icon solid fa-arrow-left" href="?page={{articles.previous_page_number}}"></a></li>
+      {% endif %}
+
+      {% for i in articles.paginator.page_range  %}
+      <li><a href="?page={{i}}" class="page">{{i}}</a></li>
+      {% endfor %}
+
+      {% if articles.has_next %}
+
+      <li><a href="?page={{articles.next_page_number}}" class="icon solid fa-arrow-right"></a></li>
+      {% endif %}
+    </ul>
+    {% endif %}
+
+  </section>
 
 {% endblock main %}

@@ -5,6 +5,10 @@ from _datetime import timezone
 from django.utils.timezone import now
 from ckeditor.fields import RichTextField
 
+
+
+
+
 '''
 METHODS
 '''
@@ -19,8 +23,6 @@ CATEGORY_TYPE = (
     ('BLOG', 'BLOG'),
     ('EDUCATION', 'EDUCATION'),
 )
-STATUS = ((0, "Draft"), (1, "Publish"))
-
 
 def image_upload(instance,filename):
     imagename , extension = filename.split(".")
@@ -34,7 +36,7 @@ MODELS
 class Articles_model(models.Model):
     title = models.CharField(max_length = 50)
     intro=models.CharField(max_length = 60)
-    main = RichTextField(max_length=2000)
+    text=RichTextField()
     creade_date = models.DateField(auto_now=True,
                                    blank=True,
                                    auto_now_add=False)
@@ -42,7 +44,6 @@ class Articles_model(models.Model):
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
     article_type=models.CharField(max_length = 150,choices=CATEGORY_TYPE)
     published_date = models.DateField()
-    status = models.IntegerField(choices=STATUS, default=0)
 
     slug = models.SlugField(blank=True, null=True)
 
@@ -56,7 +57,11 @@ class Articles_model(models.Model):
     def __str__(self):
         return self.title
 
-
+    def get_article_type():
+        lst=[]
+        for i in CATEGORY_TYPE:
+            lst.append(i[1])
+        return lst
 
 
 
@@ -65,3 +70,13 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+class Comments(models.Model):
+    article=models.ForeignKey(Articles_model, verbose_name=("comment"),related_name='comment', on_delete=models.CASCADE)
+    name=models.CharField(max_length=50)
+    body=models.TextField()
+    date_added=models.DateField( auto_now=False, auto_now_add=True)
+
+
+    def __str__(self):
+        return '%s - %s' % (self.article, self.name)
