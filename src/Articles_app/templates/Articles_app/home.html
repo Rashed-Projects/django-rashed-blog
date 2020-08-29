@@ -10,12 +10,8 @@
         <article>
            <a href="#" class="image">
              {% load thumbnail %}
-             
-             {% comment %}
-               {% thumbnail [source] [size] [options] as [variable] %}
-             {% endcomment %}
-               
-             <img src="{{ profile.photo|thumbnail_url:'avatar' }}" alt="" />
+                {% thumbnail item.image 400x200 crop as img %}
+             <img src="{{ img.url }}" alt="" />
             </a>
            <h3> {{item.title}}</h3>
            <p>

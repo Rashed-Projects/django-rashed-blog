@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.utils.text import slugify
 from _datetime import timezone
 from django.utils.timezone import now
-
+from ckeditor.fields import RichTextField
 
 '''
 METHODS
@@ -19,6 +19,8 @@ CATEGORY_TYPE = (
     ('BLOG', 'BLOG'),
     ('EDUCATION', 'EDUCATION'),
 )
+STATUS = ((0, "Draft"), (1, "Publish"))
+
 
 def image_upload(instance,filename):
     imagename , extension = filename.split(".")
@@ -32,7 +34,7 @@ MODELS
 class Articles_model(models.Model):
     title = models.CharField(max_length = 50)
     intro=models.CharField(max_length = 60)
-    main=models.CharField(max_length = 2000)
+    main = RichTextField(max_length=2000)
     creade_date = models.DateField(auto_now=True,
                                    blank=True,
                                    auto_now_add=False)
@@ -40,6 +42,7 @@ class Articles_model(models.Model):
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
     article_type=models.CharField(max_length = 150,choices=CATEGORY_TYPE)
     published_date = models.DateField()
+    status = models.IntegerField(choices=STATUS, default=0)
 
     slug = models.SlugField(blank=True, null=True)
 
