@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'Articles_app',
     'easy_thumbnails',
     'ckeditor',
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [
@@ -197,11 +198,11 @@ CKEDITOR_CONFIGS = {
             'dialogui',
             'elementspath',
             'language',
-            'uploadimage', 
+            'uploadimage',
             'uploadwidget',
             'colordialog',
             'embed',
-            
+
         ]),
     }
 }
