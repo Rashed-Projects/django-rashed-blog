@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Articles_model,Category
+from .models import Articles_model,Category,Comments,Comments_comment
 from django.core.paginator import Paginator
 
 # Create your views here.
@@ -28,7 +28,12 @@ def home(request):
 
 def articleDetails(request,slug):
     article=Articles_model.objects.get(slug=slug)
+    comment=Comments.objects.all()
+    comment_comments=Comments_comment.objects.get()
+    
     context={
-        'article':article
+        'article':article,
+        'comment':comment,
+        'comment_comments':comment_comments,
     }
     return render(request,'Articles_app/article_details.html',context)

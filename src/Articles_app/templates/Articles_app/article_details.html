@@ -37,7 +37,16 @@
             </span>
   </section>
   <section>
+<h1>
 
+{% for i in comment  %}
+  <h6>
+{{i.name}}
+  </h6>
+  {{i.body}}
+{% endfor %}
+</h1>
+<hr>
 <!-- old comments -->
       <h3>Box</h3>
       <div class="box">

@@ -89,3 +89,12 @@ class Comments(models.Model):
 
     def __str__(self):
         return '%s - %s' % (self.article, self.name)
+
+class Comments_comment(models.Model):
+    comment=models.ForeignKey(Comments, verbose_name=("Comments_comment"), on_delete=models.CASCADE)
+    name=models.CharField(max_length=50)
+    body=models.TextField()
+    date_added=models.DateField( auto_now=False, auto_now_add=True)
+
+    def __str__(self):
+        return '%s - %s' % (self.comment, self.name)
