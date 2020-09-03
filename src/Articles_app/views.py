@@ -13,11 +13,9 @@ def getMainArticle():
 def home(request):
     articles=Articles_model.objects.all()
     
-    paginator = Paginator(articles, 2) # Show 25 contacts per page.
+    paginator = Paginator(articles, 4) # Show 25 contacts per page.
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-
-    
 
     context={
         'articles':page_obj,

@@ -39,21 +39,27 @@
   <section>
 <h1>
 
-{% for i in comment  %}
-  <h6>
-{{i.name}}
-  </h6>
-  {{i.body}}
-{% endfor %}
+
 </h1>
 <hr>
 <!-- old comments -->
-      <h3>Box</h3>
+      <h3>Comments:</h3>
+      {% for i in comment  %}
+      
+            
+      
+     
       <div class="box">
-            <p>Felis sagittis eget tempus primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac
-                  adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus
-                  euismod. Magna sed etiam ante ipsum primis in faucibus vestibulum.</p>
+            <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?f=y" alt="user img">
+            <h4>{{i.name}}</h4>
+            <p>{{i.date_added}}</p>
+            <hr>
+            <p>
+                  {{i.body}}
+            </p>
       </div>
+      {% endfor %}
+
       <!-- comment form -->
       <form method="post" action="#">
             <div class="row gtr-uniform">
