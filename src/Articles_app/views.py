@@ -1,6 +1,8 @@
 from django.shortcuts import render
-from .models import Articles_model,Category,Comments,Comments_comment
+from .models import Articles_model,Category,Comments
 from django.core.paginator import Paginator
+from django.db.models import Prefetch
+from .forms import CommentForm
 
 # Create your views here.
 
@@ -27,11 +29,20 @@ def home(request):
 def articleDetails(request,slug):
     article=Articles_model.objects.get(slug=slug)
     comment=Comments.objects.all()
-    comment_comments=Comments_comment.objects.get()
     
+    if request.method=='POST':
+        comment_form=CommentForm(request.POST)
+        if comment_form.is_valid():
+            comment_form.save()
+        # pass
+    else:
+        CommentForm()
+
+        
+
     context={
         'article':article,
         'comment':comment,
-        'comment_comments':comment_comments,
+        'form':CommentForm,
     }
     return render(request,'Articles_app/article_details.html',context)

@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load bootstrap4 %}
+
   <section>
         <header class="main">
               <h1>
@@ -44,56 +46,113 @@
 <hr>
 <!-- old comments -->
       <h3>Comments:</h3>
-      {% for i in comment  %}
-      
-            
-      
-     
-      <div class="box">
-            <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?f=y" alt="user img">
-            <h4>{{i.name}}</h4>
-            <p>{{i.date_added}}</p>
-            <hr>
-            <p>
-                  {{i.body}}
-            </p>
-      </div>
-      {% endfor %}
+     <div id="comments-container" >
+
+           <ul id="comments">
+
+                 {% for i in comment  %}
+
+                 <li class="comment">
+                       <div class="avatar">
+                             <a href="#">
+                                   <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?f=y"
+                                         alt="user img" style="max-width: 50px;">
+                             </a>
+                       </div>
+                       <div class="comment__content">
+                             <header>
+                                   <a href="#">
+                                         <span class="user__link">{{i.name}}</span>
+                                   </a>
+                                   <span class="comment__pub-date"> - posted {{i.date_added}}</span>
+                             </header>
+                             <p>
+                                   {{i.body}}
+                             </p>
+                       </div>
+                 </li>
+                 {% endfor %}
+
+           </ul>
+     </div>
+
 
       <!-- comment form -->
-      <form method="post" action="#">
-            <div class="row gtr-uniform">
-                  <div class="col-6 col-12-xsmall">
-                        <input type="text" name="demo-name" id="demo-name" value="" placeholder="Name">
-                  </div>
-                  <div class="col-6 col-12-xsmall">
-                        <input type="email" name="demo-email" id="demo-email" value="" placeholder="Email">
-                  </div>
-                  <!-- Break -->
-                  <div class="col-12">
-
-                  </div>
-                  <!-- Break -->
-
-
-
-
-
-
-
-                  <div class="col-12">
-                        <textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
-                  </div>
-                  <!-- Break -->
-                  <div class="col-12">
-                        <ul class="actions">
-                              <li><input type="submit" value="Send Message" class="primary"></li>
-                              <li><input type="reset" value="Reset"></li>
-                        </ul>
-                  </div>
-            </div>
+      <form method="POST" action="#" style="margin-top: 29px;">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {{
+                  form.article.value()|default(article.id)
+            }}
+            {%buttons %}
+             <button type="submit" class="btn btn-primary">
+                   Submit
+             </button>
+            {%endbuttons%}
       </form>
   </section>
 
+<!-- 
+      <div class="row gtr-uniform">
+            <div class="col-6 col-12-xsmall">
+                  <input type="text" name="demo-name" id="demo-name" value="" placeholder="Name">
+            </div>
+            <div class="col-6 col-12-xsmall">
+                  <input type="email" name="demo-email" id="demo-email" value="" placeholder="Email">
+            </div>
+            <!-- Break -->
+            <!-- <div class="col-12">
+
+            </div> -->
+            <!-- Break -->
+
+            <!-- <div class="col-12">
+                  <textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
+            </div> -->
+            <!-- Break -->
+            <!-- <div class="col-12">
+                  <ul class="actions">
+                        <li><input type="submit" value="Send Message" class="primary"></li>
+                        <li><input type="reset" value="Reset"></li>
+                  </ul>
+            </div>
+      </div> -->
 
 {% endblock content %}
+
+
+{% block comment %}
+
+{% endblock comment %}
+
+<!-- 
+
+       <li class="comment">
+             <div class="avatar">
+                   <a href="#">
+                         <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?f=y" alt="user img"
+                               style="max-width: 50px;">
+                   </a>
+             </div>
+             <div class="comment__content">
+                   <header>
+                         <a href="#">
+                               <span class="user__link">Eva</span>
+                         </a>
+                         <span class="comment__pub-date"> - posted 1 week ago</span>
+                         <a href="#" title="report abuse" class="comment__action"><i
+                                     class="fa fa-exclamation-triangle comment__action--report-abuse"
+                                     aria-hidden="true"></i></a>
+                   </header>
+                   <p>
+                         Sed felis lorem, venenatis sed malesuada vitae, tempor vel turpis. Mauris in
+                         dui velit, vitae mollis
+                         risus.
+                   </p>
+                   <footer class="comment__action--footer">
+                         <a href="#" title="like" class="comment__action">like</a>
+                         <a href="#" title="reply" class="comment__action">reply</a>
+                   </footer>
+             </div>
+       </li>
+ -->

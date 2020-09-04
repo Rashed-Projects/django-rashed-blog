@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'Articles_app',
     'easy_thumbnails',
     'ckeditor',
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [
