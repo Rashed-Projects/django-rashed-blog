@@ -22,10 +22,15 @@ def home(request):
     context={
         'articles':page_obj,
         'mainArticle':getMainArticle(),
-        'type':Articles_model.get_article_type()
+        'type':Articles_model.get_article_type(),
+        'topArticle':getTopArticles(),
     }
     return render(request,'Articles_app/home.html',context)
 
+
+def getTopArticles():
+    top=Articles_model.objects.latest('creade_date')
+    return top
 def articleDetails(request,slug):
     article=Articles_model.objects.get(slug=slug)
     comment=Comments.objects.all()

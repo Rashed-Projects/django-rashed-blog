@@ -60,3 +60,32 @@
   </section>
 
 {% endblock main %}
+
+{% block topArticles %}
+
+
+   <section>
+     <header class="major">
+       <h2>Top Articles</h2>
+     </header>
+     <div class="mini-posts">
+    
+       <article>
+         <a href="{% url 'Articles_app:detials' slug=topArticle.slug %}" class="image">
+            {% load thumbnail %}
+           <img src="{{topArticle.image|thumbnail_url:'listArticle' }}" alt=" " />
+          </a>
+         <h6>
+            {{topArticle.title| upper}}
+         </h6>
+         <p>
+            {{topArticle.intro| capfirst}}
+         </p>
+       </article>
+
+     </div>
+     <ul class="actions">
+       <li><a href="#" class="button">More</a></li>
+     </ul>
+   </section>
+{% endblock topArticles %}
