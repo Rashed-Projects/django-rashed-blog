@@ -39,19 +39,14 @@
             </span>
   </section>
   <section>
-<h1>
-
-
-</h1>
-<hr>
 <!-- old comments -->
       <h3>Comments:</h3>
-     <div id="comments-container" >
+{% for i in comment  %}
 
-           <ul id="comments">
+{% if i.aproved %}
 
-                 {% for i in comment  %}
-
+<div id="comments-container">
+<ul id="comments">                    
                  <li class="comment">
                        <div class="avatar">
                              <a href="#">
@@ -71,23 +66,22 @@
                              </p>
                        </div>
                  </li>
-                 {% endfor %}
-
+                  
            </ul>
      </div>
 
+      {% endif %}
+      {% endfor %}
+
+
 
       <!-- comment form -->
-      <form method="POST" action="#" style="margin-top: 29px;">
+      <form method="POST" action="#" style="margin-top: 29px;" enctype="multipart/form-data">
             {% csrf_token %}
-            {% bootstrap_form form %}
-            {{
-                  form.article.value()|default(article.id)
-            }}
-            {%buttons %}
-             <button type="submit" class="btn btn-primary">
-                   Submit
-             </button>
+            {%bootstrap_form form%}
+            {%buttons%}
+            <br>
+            <button type="submit">submit</button>
             {%endbuttons%}
       </form>
   </section>

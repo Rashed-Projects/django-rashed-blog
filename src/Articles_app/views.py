@@ -30,15 +30,16 @@ def articleDetails(request,slug):
     article=Articles_model.objects.get(slug=slug)
     comment=Comments.objects.all()
     
+    
     if request.method=='POST':
         comment_form=CommentForm(request.POST)
         if comment_form.is_valid():
+            comment_form=comment_form.save(commit=False)
+            comment_form.article=article
             comment_form.save()
-        # pass
     else:
         CommentForm()
 
-        
 
     context={
         'article':article,
