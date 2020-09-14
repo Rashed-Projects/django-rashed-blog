@@ -81,11 +81,26 @@ class Category(models.Model):
         return self.name
 
 class Comments(models.Model):
-    article=models.ForeignKey(Articles_model, verbose_name=("comment"),related_name='comment', on_delete=models.CASCADE)
+    article=models.ForeignKey(Articles_model,related_name='comment', on_delete=models.CASCADE)
     name=models.CharField(max_length=50)
+    email=models.CharField(max_length=50)
     body=models.TextField()
     date_added=models.DateField( auto_now=False, auto_now_add=True)
-
+    aproved=models.BooleanField(default=False)
 
     def __str__(self):
-        return '%s - %s' % (self.article, self.name)
+        return '%s, %s' % (self.article,self.name)
+    
+    def aproveded(self):
+        self.aproved=True
+        self.save()
+"""
+    # class Comments_comment(models.Model):
+    #     comment=models.ForeignKey(Comments, verbose_name=("Comments_comment"), on_delete=models.CASCADE)
+    #     name=models.CharField(max_length=50)
+    #     body=models.TextField()
+    #     date_added=models.DateField( auto_now=False, auto_now_add=True)
+
+    #     def __str__(self):
+    #         return '%s - %s' % (self.comment, self.name)
+"""

@@ -4,3 +4,4 @@ from .models import Articles_model,Category,Comments
 admin.site.register(Articles_model)
 admin.site.register(Category)
 admin.site.register(Comments)
+
